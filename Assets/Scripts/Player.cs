@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
 
     private void Start ()
     {
-        
+        _numSeedsLeft=5;
+        _numSeedsPlanted=0;
     }
 
     private void Update()
@@ -42,9 +43,13 @@ public class Player : MonoBehaviour
 
     public void PlantSeed ()
     {
+       
+
        if (Input.GetKey(KeyCode.Space))
        {
-        _numSeeds--;
+        _numSeedsLeft = _numSeeds--;
+        _numSeedsPlanted++;
+        Instantiate(_plantPrefab, transform.position, transform.rotation);
        } 
     }
 }

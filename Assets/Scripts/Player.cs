@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private void Start ()
     {
-        _numSeedsLeft=5;
+        _numSeedsLeft=_numSeeds;
         _numSeedsPlanted=0;
     }
 
@@ -39,9 +39,11 @@ public class Player : MonoBehaviour
             _playerTransform.Translate(Vector3.right*_speed*Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _numSeedsLeft<=5 && _numSeedsLeft>1)
         {
             Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
+            _numSeedsLeft = _numSeeds--;
+            _numSeedsPlanted++;
         }
 
     }

@@ -19,37 +19,35 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             _playerTransform.Translate(Vector3.up*_speed*Time.deltaTime);
         }
         
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             _playerTransform.Translate(Vector3.left*_speed*Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             _playerTransform.Translate(Vector3.down*_speed*Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             _playerTransform.Translate(Vector3.right*_speed*Time.deltaTime);
         }
         
     }
 
-    public void PlantSeed ()
+    public void PlantSeed()
     {
-       
-
-       if (Input.GetKey(KeyCode.Space))
+       if (Input.GetKey(KeyCode.Space) && _numSeedsLeft>=0 && _numSeedsLeft<=5)
        {
+        Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
         _numSeedsLeft = _numSeeds--;
         _numSeedsPlanted++;
-        Instantiate(_plantPrefab, transform.position, transform.rotation);
        } 
     }
 }

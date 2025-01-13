@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1.0f;
+    [SerializeField] private float _speed = 5.0f;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private GameObject _plantPrefab;
     [SerializeField] private int _numSeeds = 5; 
@@ -38,16 +38,16 @@ public class Player : MonoBehaviour
         {
             _playerTransform.Translate(Vector3.right*_speed*Time.deltaTime);
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
+        }
+
     }
 
     public void PlantSeed()
     {
-       if (Input.GetKey(KeyCode.Space) && _numSeedsLeft>=0 && _numSeedsLeft<=5)
-       {
-        Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
-        _numSeedsLeft = _numSeeds--;
-        _numSeedsPlanted++;
-       } 
+       
     }
 }

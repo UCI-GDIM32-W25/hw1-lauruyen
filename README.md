@@ -23,18 +23,21 @@ Prompt: Include the HW1 break-down exercise you wrote during the Week 1 - Lectur
 
 
 I started by first writing the script for the player movement, for the WASD and arrow keys. Under the Update function in the Player script, I used an if statement, with the condition that (for example) when either the W key or up arrow is pressed, the player would move upward. (I changed the speed from 1 to 5.)
+
 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             _playerTransform.Translate(Vector3.up*_speed*Time.deltaTime);
         }
 
 Under the same Update function, I set up the if statement for planting seeds. If the spacebar is pressed AND the player has less than or equal to 5 seeds AND the number of seeds left is greater than 0, the PlantSeed function is called. 
+
 if (Input.GetKeyDown(KeyCode.Space) && _numSeedsLeft<=5 && _numSeedsLeft>0)
         {
             PlantSeed();
         }
 
 Before I wrote the PlantSeed function in the Player script, I went back to the Start function to set _numSeedsLeft equal to _numSeeds (the variable provided in the skeleton code), and _numSeedsPlanted to 0. These will be called in the PlantSeed function. 
+
 private void Start ()
     {
         _numSeedsLeft=_numSeeds;
@@ -44,6 +47,7 @@ private void Start ()
 I added a plant sprite as a prefab in unity, then dragged the prefab from the project folder to the Plant Prefab space in the Player inspector to set it as a game object. Under the Canvas dropdown, I dragged the seeds planted and remaining text boxes to their respective places under the PlantCountUI script, then dragged the Canvas to the Plant Count UI place under the Player script in inspector. 
 
 Then I was ready to write in the player’s action for planting the seeds. Under the PlantSeed function I instantiated the plant prefab to make it appear at the player’s location with Instantiate(prefab, player position, player orientation). I also subtracted the number of seeds left by 1 (--) and added the number of seeds planted by 1 (++). Finally, I called the PlantCountUI script with  _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted), in which _plantCountUI is the script’s name, UpdateSeeds is the function that is being called, and (_numSeedsLeft, _numSeedsPlanted) is the parameter corresponding to the variables in the PlantCountUI script with the same values but different names, (seedsLeft, seedsPlanted). 
+
 public void PlantSeed()
     {
        Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
@@ -53,6 +57,7 @@ public void PlantSeed()
     }
 
 On Unity, I changed the “##” in the UI text boxes to 0 and 5 respectively, then went back to the UpdateSeeds function in the PlantCountUI script to convert the seedsPlanted and seedsLeft integers to strings that displayed in the Unity UI text boxes, _plantedText and _remainingText, respectively. 
+
 public void UpdateSeeds (int seedsLeft, int seedsPlanted)
     {
         _plantedText.SetText(seedsPlanted.ToString());

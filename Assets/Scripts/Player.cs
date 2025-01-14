@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private float _speed = 2.0f;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private GameObject _plantPrefab;
     [SerializeField] private int _numSeeds = 5; 
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
             Instantiate(_plantPrefab, _playerTransform.position, _playerTransform.rotation);
             _numSeedsLeft = _numSeeds--;
             _numSeedsPlanted++;
+            _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted);
         }
 
     }
